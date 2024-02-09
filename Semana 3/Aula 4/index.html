@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>Calculadora de Idade</h2>
+
+<p>Digite sua data de nascimento:</p>
+
+<input type="date" id="dataNascimento" name="dataNascimento">
+
+<button onclick="mostrarIdade()">Calcular Idade</button>
+
+<p id="resultado"></p>
+
+<script>
+function calcularIdade(dataNascimento) {
+    var hoje = new Date();
+    var nascimento = new Date(dataNascimento);
+    var idade = hoje.getFullYear() - nascimento.getFullYear();
+    var m = hoje.getMonth() - nascimento.getMonth();
+    if (m < 0 || (m === 0 && hoje.getDate() < nascimento.getDate())) {
+        idade--;
+    }
+    return idade;
+}
+
+function mostrarIdade() {
+    var dataNascimento = document.getElementById("dataNascimento").value;
+    var idade = calcularIdade(dataNascimento);
+    document.getElementById("resultado").innerHTML = "Você tem " + idade + " anos.";
+}
+</script>
+
+</body>
+</html>
