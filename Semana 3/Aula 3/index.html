@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>Calculadora de P.A.</h2>
+
+<button onclick="calcularPA()">Calcular P.A.</button>
+
+<script>
+function calcularPA() {
+    // Solicita ao usuário o valor inicial e a raiz da P.A.
+    let valorInicial = Number(prompt("Digite o valor inicial da P.A."));
+    let raiz = Number(prompt("Digite a raiz da P.A."));
+
+    // Calcula e exibe os 10 primeiros valores da P.A.
+    let PA = [valorInicial];
+    for(let i = 1; i < 10; i++) {
+        PA.push(PA[i - 1] + raiz);
+    }
+
+    // Exibe a P.A. na tela
+    alert("A P.A. é: " + PA.join(", "));
+}
+</script>
+
+</body>
+</html>
