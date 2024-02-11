@@ -3,7 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Exercício da semana 3 parte 4</title>
+    <title>Exercício da semana 3 parte 2</title>
+    <!-- CSS do Bootstrap -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
     <style>
         body, html {
             height: 100%;
@@ -20,12 +22,14 @@
     </style>
 </head>
 <body>
-    <h1>Digite sua atividade</h1>
-    <input type="text" id="novaAtividade" placeholder="Digite uma nova atividade aqui">
-    <button id="adicionarAtividade">Adicionar Atividade</button>
-    <ul id="listaAtividades">
+    <h1 class="text-center">Lista de afazeres</h1>
+    <input type="text" id="novaAtividade" class="form-control" placeholder="Digite uma nova atividade aqui">
+    <button id="adicionarAtividade" class="btn btn-primary mt-2">Adicionar Atividade</button>
+    <ul id="listaAtividades" class="mt-2">
     </ul>
 
+    <!-- JavaScript do Bootstrap -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
     <script>
         document.getElementById('adicionarAtividade').addEventListener('click', function() {
             var atividade = document.getElementById('novaAtividade').value;
@@ -34,6 +38,7 @@
             checkbox.type = 'checkbox';
             var button = document.createElement('button');
             button.textContent = 'x';
+            button.className = 'btn btn-danger ml-2';
             button.addEventListener('click', function() {
                 this.parentElement.remove();
             });
