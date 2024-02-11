@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercício da semana 3 parte 4</title>
+    <style>
+        body, html {
+            height: 100%;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+        ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>Digite sua atividade</h1>
+    <input type="text" id="novaAtividade" placeholder="Digite uma nova atividade aqui">
+    <button id="adicionarAtividade">Adicionar Atividade</button>
+    <ul id="listaAtividades">
+    </ul>
+
+    <script>
+        document.getElementById('adicionarAtividade').addEventListener('click', function() {
+            var atividade = document.getElementById('novaAtividade').value;
+            var li = document.createElement('li');
+            var checkbox = document.createElement('input');
+            checkbox.type = 'checkbox';
+            var button = document.createElement('button');
+            button.textContent = 'x';
+            button.addEventListener('click', function() {
+                this.parentElement.remove();
+            });
+            li.appendChild(checkbox);
+            li.appendChild(document.createTextNode(atividade));
+            li.appendChild(button);
+            document.getElementById('listaAtividades').appendChild(li);
+            document.getElementById('novaAtividade').value = '';
+        });
+    </script>
+</body>
+</html>
