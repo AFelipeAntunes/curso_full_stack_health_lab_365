@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Estação do Ano</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <style>
+        body {
+            transition: background-color 1s ease;
+        }
+        .verao {
+            background-color: #FFD700;
+        }
+        .outono {
+            background-color: #FF8C00;
+        }
+        .inverno {
+            background-color: #87CEEB;
+        }
+        .primavera {
+            background-color: #32CD32;
+        }
+    </style>
+</head>
+<body>
+    <div class="container text-center">
+        <input type="date" id="date-input" onchange="updateSeason()">
+        <h1 id="season-text"></h1>
+        <h1 id="season-emoji"></h1>
+        <p id="season-description"></p>
+    </div>
+
+    <script>
+        function updateSeason() {
+            var input = document.getElementById('date-input');
+            var date = new Date(input.value);
+            var month = date.getMonth() + 1;
+            var day = date.getDate();
+            var seasonText = document.getElementById('season-text');
+            var seasonEmoji = document.getElementById('season-emoji');
+            var seasonDescription = document.getElementById('season-description');
+            var body = document.body;
+
+            if ((month == 12 && day >= 22) || (month == 1) || (month == 2) || (month == 3 && day <= 21)) {
+                seasonText.innerHTML = 'Verão';
+                seasonEmoji.innerHTML = '☀️';
+                seasonDescription.innerHTML = 'O verão é uma época de calor e sol. É um ótimo momento para ir à praia e desfrutar de atividades ao ar livre.';
+                body.className = 'verao';
+            } else if ((month == 3 && day >= 22) || (month == 4) || (month == 5) || (month == 6 && day <= 21)) {
+                seasonText.innerHTML = 'Outono';
+                seasonEmoji.innerHTML = '🍂';
+                seasonDescription.innerHTML = 'O outono é uma época de mudança, quando as folhas mudam de cor e o clima começa a esfriar. É um ótimo momento para caminhadas e passeios ao ar livre.';
+                body.className = 'outono';
+            } else if ((month == 6 && day >= 22) || (month == 7) || (month == 8) || (month == 9 && day <= 21)) {
+                seasonText.innerHTML = 'Inverno';
+                seasonEmoji.innerHTML = '❄️';
+                seasonDescription.innerHTML = 'O inverno é uma época de frio e neve. É um ótimo momento para atividades de inverno como esquiar e fazer bonecos de neve.';
+                body.className = 'inverno';
+            } else {
+                seasonText.innerHTML = 'Primavera';
+                seasonEmoji.innerHTML = '🌸';
+                seasonDescription.innerHTML = 'A primavera é uma época de renovação, quando as flores começam a florescer e o clima começa a aquecer. É um ótimo momento para jardinagem e piqueniques ao ar livre.';
+                body.className = 'primavera';
+            }
+        }
+    </script>
+</body>
+</html>
+
