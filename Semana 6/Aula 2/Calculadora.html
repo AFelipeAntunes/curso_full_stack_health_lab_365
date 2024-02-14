@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora Simples</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+9Au7w6QzPsE0OY5tYBw+pX0t6q7l/PTXyoH7Xt5r030WkR3gn…n384-0evHe/X+9Au7w6QzPsE0OY5tYBw+pX0t6q7l/PTXyoH7Xt5r030WkR3gn…n" crossorigin="anonymous">
+</head>
+<body>
+    <div class="container">
+        <h1>Calculadora Simples</h1>
+        <form onsubmit="return false;">
+            <div class="row mb-3">
+                <div class="col-sm-6">
+                    <input type="number" id="valor1" class="form-control" placeholder="Primeiro valor">
+                </div>
+                <div class="col-sm-6">
+                    <input type="number" id="valor2" class="form-control" placeholder="Segundo valor">
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-sm-12">
+                    <button type="button" class="btn btn-primary" onclick="somar()">Somar</button>
+                    <button type="button" class="btn btn-secondary" onclick="subtrair()">Subtrair</button>
+                    <button type="button" class="btn btn-success" onclick="multiplicar()">Multiplicar</button>
+                    <button type="button" class="btn btn-warning" onclick="dividir()">Dividir</button>
+                    <button type="button" class="btn btn-danger" onclick="limpar()">Limpar</button>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <input type="number" id="resultado" class="form-control" readonly>
+                </div>
+            </div>
+        </form>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>
