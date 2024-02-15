@@ -1,28 +1,72 @@
 <!DOCTYPE html>
 <html>
+<head>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <style>
+    body {
+      background: linear-gradient(to bottom, #4169e1, #000080);
+      color: white;
+    }
+    .form-text {
+      color: #FFD700; /* Cor amarela para o texto de orientação da senha */
+    }
+  </style>
+</head>
 <body>
 
-<h2>Formulário de Cadastro</h2>
+<div class="container">
+  <h2>Formulário de Cadastro</h2>
 
-<form id="myForm">
-  <label for="fname">Nome:</label><br>
-  <input type="text" id="fname" name="fname" required><br>
-  <label for="email">Email:</label><br>
-  <input type="email" id="email" name="email" required><br>
-  <label for="pwd">Senha:</label><br>
-  <input type="password" id="pwd" name="pwd" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Deve conter pelo menos um número, uma letra maiúscula, uma minúscula e ter pelo menos 8 caracteres" required><br>
-  <label for="cpwd">Confirme a Senha:</label><br>
-  <input type="password" id="cpwd" name="cpwd" required><br>
-  <label for="dob">Data de Nascimento:</label><br>
-  <input type="text" id="dob" name="dob" pattern="(0[1-9]|[12][0-9]|3[01])/(0[1-9]|1[012])/[12][0-9]{3}" title="Formato DD/MM/YYYY" required><br>
-  <input type="checkbox" id="kids" name="kids" onclick="showKidsNumber()">
-  <label for="kids"> Possui filhos?</label><br>
-  <div id="kidsNumber" style="display:none">
-    <label for="numKids">Número de Filhos:</label><br>
-    <input type="number" id="numKids" name="numKids" min="1" required><br>
+  <form id="myForm">
+    <div class="form-group">
+      <label for="fname">Nome: *</label>
+      <input type="text" class="form-control" id="fname" name="fname" required>
+      <div class="invalid-feedback">Por favor, preencha este campo.</div>
+    </div>
+    <div class="form-group">
+      <label for="email">Email:</label>
+      <input type="email" class="form-control" id="email" name="email" required>
+      <div class="invalid-feedback">Por favor, insira um e-mail válido.</div>
+    </div>
+    <div class="form-group">
+      <label for="pwd">Senha: *</label>
+      <input type="password" class="form-control" id="pwd" name="pwd" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" required>
+      <input type="checkbox" onclick="showPassword()"> Mostrar Senha
+      <small id="passwordHelpBlock" class="form-text text-muted">
+        Sua senha deve ter pelo menos 8 caracteres, uma letra maiúscula, uma minúscula e um número.
+      </small>
+      <div class="invalid-feedback">A senha deve conter pelo menos um número, uma letra maiúscula, uma minúscula e ter pelo menos 8 caracteres.</div>
+    </div>
+    <div class="form-group">
+      <label for="cpwd">Confirme a Senha: *</label>
+      <input type="password" class="form-control" id="cpwd" name="cpwd" required>
+      <div class="invalid-feedback">As senhas não correspondem.</div>
+    </div>
+    <div class="form-group">
+      <label for="dob">Data de Nascimento: *</label>
+      <input type="date" class="form-control" id="dob" name="dob" required>
+      <div class="invalid-feedback">Por favor, insira a data no formato DD/MM/YYYY.</div>
+    </div>
+    <div class="form-check">
+      <input type="checkbox" class="form-check-input" id="kids" name="kids" onclick="showKidsNumber()">
+      <label class="form-check-label" for="kids">Possui filhos?</label>
+    </div>
+    <div id="kidsNumber" style="display:none" class="form-group">
+      <label for="numKids">Número de Filhos:</label>
+      <input type="number" class="form-control" id="numKids" name="numKids" min="1" required>
+      <div class="invalid-feedback">Por favor, preencha este campo.</div>
+    </div>
+    <button type="submit" class="btn btn-primary">Enviar</button>
+  </form>
+
+  <div id="success-message" class="alert alert-success" style="display:none">
+    Formulário enviado com sucesso!
   </div>
-  <input type="submit" value="Enviar">
-</form>
+
+  <div id="error-message" class="alert alert-danger" style="display:none">
+    O formulário não foi enviado. Por favor, corrija os erros.
+  </div>
+</div>
 
 <script>
 function showKidsNumber() {
@@ -35,20 +79,42 @@ function showKidsNumber() {
   }
 }
 
-document.getElementById("myForm").onsubmit = function(e) {
-  e.preventDefault();
+function showPassword() {
+  var x = document.getElementById("pwd");
+  if (x.type === "password") {
+    x.type = "text";
+  } else {
+    x.type = "password";
+  }
+}
+
+document.getElementById("myForm").addEventListener("submit", function(event){
+  event.preventDefault();
+  var form = event.target;
+  var isValid = form.checkValidity();
+  if (!isValid) {
+    event.stopPropagation();
+  }
+  form.classList.add('was-validated');
   if(document.getElementById("pwd").value != document.getElementById("cpwd").value) {
-    alert("As senhas não correspondem!");
+    document.getElementById("cpwd").setCustomValidity("As senhas não correspondem!");
     return false;
   }
-  console.log("Nome: " + document.getElementById("fname").value);
-  console.log("Email: " + document.getElementById("email").value);
-  console.log("Data de Nascimento: " + document.getElementById("dob").value);
-  if(document.getElementById("kids").checked) {
-    console.log("Número de Filhos: " + document.getElementById("numKids").value);
+  if(isValid){
+    console.log("Nome: " + document.getElementById("fname").value);
+    console.log("Email: " + document.getElementById("email").value);
+    console.log("Data de Nascimento: " + document.getElementById("dob").value);
+    if(document.getElementById("kids").checked) {
+      console.log("Número de Filhos: " + document.getElementById("numKids").value);
+    }
+    document.getElementById("myForm").reset();
+    document.getElementById("success-message").style.display = "block";
+    document.getElementById("error-message").style.display = "none";
+  } else {
+    document.getElementById("error-message").style.display = "block";
+    document.getElementById("success-message").style.display = "none";
   }
-  document.getElementById("myForm").reset();
-}
+});
 </script>
 
 </body>
