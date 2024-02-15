@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>Formulário de Cadastro</h2>
+
+<form id="myForm">
+  <label for="fname">Nome:</label><br>
+  <input type="text" id="fname" name="fname" required><br>
+  <label for="email">Email:</label><br>
+  <input type="email" id="email" name="email" required><br>
+  <label for="pwd">Senha:</label><br>
+  <input type="password" id="pwd" name="pwd" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Deve conter pelo menos um número, uma letra maiúscula, uma minúscula e ter pelo menos 8 caracteres" required><br>
+  <label for="cpwd">Confirme a Senha:</label><br>
+  <input type="password" id="cpwd" name="cpwd" required><br>
+  <label for="dob">Data de Nascimento:</label><br>
+  <input type="text" id="dob" name="dob" pattern="(0[1-9]|[12][0-9]|3[01])/(0[1-9]|1[012])/[12][0-9]{3}" title="Formato DD/MM/YYYY" required><br>
+  <input type="checkbox" id="kids" name="kids" onclick="showKidsNumber()">
+  <label for="kids"> Possui filhos?</label><br>
+  <div id="kidsNumber" style="display:none">
+    <label for="numKids">Número de Filhos:</label><br>
+    <input type="number" id="numKids" name="numKids" min="1" required><br>
+  </div>
+  <input type="submit" value="Enviar">
+</form>
+
+<script>
+function showKidsNumber() {
+  var checkBox = document.getElementById("kids");
+  var text = document.getElementById("kidsNumber");
+  if (checkBox.checked == true){
+    text.style.display = "block";
+  } else {
+    text.style.display = "none";
+  }
+}
+
+document.getElementById("myForm").onsubmit = function(e) {
+  e.preventDefault();
+  if(document.getElementById("pwd").value != document.getElementById("cpwd").value) {
+    alert("As senhas não correspondem!");
+    return false;
+  }
+  console.log("Nome: " + document.getElementById("fname").value);
+  console.log("Email: " + document.getElementById("email").value);
+  console.log("Data de Nascimento: " + document.getElementById("dob").value);
+  if(document.getElementById("kids").checked) {
+    console.log("Número de Filhos: " + document.getElementById("numKids").value);
+  }
+  document.getElementById("myForm").reset();
+}
+</script>
+
+</body>
+</html>
