@@ -2,12 +2,23 @@
 <html>
 <head>
   <style>
+    /* Estilo para o corpo da página */
+    body {
+      background-color: #f5f5f5; /* Cor de fundo suave */
+      font-family: 'Arial', sans-serif; /* Fonte agradável e legível */
+      color: #333; /* Cor de texto escura para contraste */
+    }
+
     /* Estilo para o cabeçalho */
     header {
       text-align: center;
       font-size: 2em;
       font-weight: bold;
       margin-bottom: 20px;
+      background-color: #008CBA; /* Cor de fundo atraente */
+      color: white; /* Cor de texto clara para contraste */
+      padding: 20px;
+      border-radius: 10px;
     }
 
     /* Estilo para o campo de texto */
@@ -21,6 +32,20 @@
     #botaoAdicionar {
       display: block;
       margin: 0 auto 20px auto; /* centraliza o botão e adiciona uma margem inferior de 20px */
+      background-color: #4CAF50; /* verde */
+      color: white; /* branco */
+      padding: 15px 32px; /* tamanho do botão */
+      text-align: center; /* alinhamento do texto */
+      text-decoration: none; /* remove o sublinhado */
+      display: inline-block;
+      font-size: 16px;
+      transition-duration: 0.4s; /* tempo de transição */
+      cursor: pointer; /* muda o cursor para um ponteiro quando você passa o mouse sobre o botão */
+    }
+
+    #botaoAdicionar:hover {
+      background-color: white; /* cor de fundo branca */
+      color: black; /* cor do texto preta */
     }
 
     /* Estilo para a lista de tarefas */
@@ -50,50 +75,33 @@
       padding: 5px;
       cursor: pointer;
     }
-
-    /* Estilos adicionais */
-    body {
-      background-color: #f0f0f0;
-      font-family: Arial, sans-serif;
-      color: #333;
-    }
-
-    header {
-      background-color: #333;
-      color: #fff;
-      padding: 20px;
-      border-radius: 10px;
-    }
-
-    #botaoAdicionar {
-      background-color: #008CBA;
-      color: white;
-      font-family: Arial, sans-serif;
-      padding: 10px 24px;
-      border-radius: 4px;
-      transition: background-color 0.3s;
-    }
-
-    #botaoAdicionar:hover {
-      background-color: #007B9A;
-    }
   </style>
 </head>
 <body>
-  <header>Meu Aplicativo</header>
+  <header>📝 Meu Aplicativo</header>
   <input id="campoTexto" type="text" placeholder="Digite uma tarefa">
-  <button id="botaoAdicionar">Adicionar Tarefa</button>
-  <ul id="listaTarefas">
-    <li class="itemLista">
-      <input type="checkbox">
-      <span>Estudar HTML e CSS</span>
-      <button class="botaoExcluir">X</button>
-    </li>
-    <li class="itemLista">
-      <input type="checkbox">
-      <span>Estudar JavaScript</span>
-      <button class="botaoExcluir">X</button>
-    </li>
-  </ul>
+  <button id="botaoAdicionar">➕ Adicionar Tarefa</button>
+  <ul id="listaTarefas"></ul>
+
+  <script>
+    document.getElementById('botaoAdicionar').addEventListener('click', function() {
+      var texto = document.getElementById('campoTexto').value;
+      if (texto) {
+        var lista = document.getElementById('listaTarefas');
+        var novoItem = document.createElement('li');
+        novoItem.innerHTML = '<input type="checkbox"><span>' + texto + '</span><button class="botaoExcluir">❌</button>';
+        lista.appendChild(novoItem);
+        document.getElementById('campoTexto').value = '';
+
+        // Adiciona um ouvinte de evento ao botão de excluir
+        novoItem.querySelector('.botaoExcluir').addEventListener('click', function() {
+          var confirmacao = confirm('Você realmente deseja excluir esta tarefa?');
+          if (confirmacao) {
+            lista.removeChild(novoItem);
+          }
+        });
+      }
+    });
+  </script>
 </body>
 </html>
