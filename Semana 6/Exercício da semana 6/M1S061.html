@@ -28,12 +28,45 @@
       margin: 0 auto; /* centraliza a lista de tarefas */
       width: 60%; /* define a largura da lista de tarefas para 60% da largura da tela */
     }
+
+    /* Estilo para os itens da lista */
+    .itemLista {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+
+    /* Estilo para o texto da tarefa quando a tarefa está concluída */
+    .concluido {
+      text-decoration: line-through;
+    }
+
+    /* Estilo para o botão de excluir */
+    .botaoExcluir {
+      background-color: red;
+      color: white;
+      border: none;
+      padding: 5px;
+      cursor: pointer;
+    }
   </style>
 </head>
 <body>
   <header>Meu Aplicativo</header>
   <input id="campoTexto" type="text" placeholder="Digite uma tarefa">
   <button id="botaoAdicionar">Adicionar Tarefa</button>
-  <ul id="listaTarefas"></ul>
+  <ul id="listaTarefas">
+    <li class="itemLista">
+      <input type="checkbox">
+      <span>Estudar HTML e CSS</span>
+      <button class="botaoExcluir">X</button>
+    </li>
+    <li class="itemLista">
+      <input type="checkbox">
+      <span>Estudar JavaScript</span>
+      <button class="botaoExcluir">X</button>
+    </li>
+  </ul>
 </body>
 </html>
