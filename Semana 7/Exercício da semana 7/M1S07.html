@@ -127,7 +127,7 @@
         // Adiciona um ouvinte de evento ao checkbox
         novoItem.querySelector('input[type="checkbox"]').addEventListener('change', function(e) {
           if (e.target.checked) {
-            novoItem.querySelector('span').style.textDecoration = 'line-through dashed';
+            novoItem.querySelector('span').style.textDecoration = 'line-through';
           } else {
             novoItem.querySelector('span').style.textDecoration = 'none';
           }
@@ -137,5 +137,6 @@
       }
     });
   </script>
+  
 </body>
 </html>
