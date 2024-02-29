@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    /* Estilo para o corpo da página */
+    body {
+      background-color: #f5f5f5;
+      font-family: 'Arial', sans-serif;
+      color: #333;
+    }
+
+    /* Estilo para o cabeçalho */
+    header {
+      text-align: center;
+      font-size: 2em;
+      font-weight: bold;
+      margin-bottom: 20px;
+      background-color: #008CBA;
+      color: white;
+      padding: 20px;
+      border-radius: 10px;
+    }
+
+    /* Estilo para o campo de texto */
+    #campoTexto {
+      display: block;
+      margin: 0 auto 20px auto;
+      width: 50%;
+    }
+
+    /* Estilo para o botão de adicionar tarefa */
+    #botaoAdicionar {
+      display: block;
+      margin: 0 auto 20px auto;
+      background-color: #4CAF50;
+      color: white;
+      padding: 15px 32px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 16px;
+      transition-duration: 0.4s;
+      cursor: pointer; /* muda o cursor para um ponteiro quando você passa o mouse sobre o botão */
+    }
+
+    #botaoAdicionar:hover {
+      background-color: white;
+      color: black;
+    }
+
+    /* Estilo para a lista de tarefas */
+    #listaTarefas {
+      margin: 0 auto; /* centraliza a lista de tarefas */
+      width: 60%;
+    }
+
+    /* Estilo para os itens da lista */
+    .itemLista {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+
+
+    .concluido {
+      text-decoration: line-through;
+    }
+
+    /* Estilo para o botão de excluir */
+    .botaoExcluir {
+      background-color: rgb(182, 105, 105);
+      color: white;
+      border: none;
+      padding: 5px;
+      cursor: pointer;
+    }
+
+    .itemLista {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+    border: 1px solid #333; /* adiciona borda em volta de cada tarefa */
+    padding: 10px; /* adiciona algum espaço interno */
+    border-radius: 5px; /* arredonda os cantos da borda */
+  }
+
+  /* Estilo para o botão de excluir */
+  .botaoExcluir {
+    background-color: red;
+    color: white;
+    border: none;
+    padding: 5px;
+    cursor: pointer;
+    border: 1px solid #333; /* adiciona borda em volta do ícone da lixeira */
+    border-radius: 5px; /* arredonda os cantos da borda */
+  }
+  
+  </style>
+</head>
+<body>
+  <header>📝 Meu Aplicativo</header>
+  <input id="campoTexto" type="text" placeholder="Digite uma tarefa">
+  <button id="botaoAdicionar">➕ Adicionar Tarefa</button>
+  <ul id="listaTarefas"></ul>
+
+  <script>
+    document.getElementById('botaoAdicionar').addEventListener('click', function() {
+      var texto = document.getElementById('campoTexto').value;
+      if (texto) {
+        var lista = document.getElementById('listaTarefas');
+        var novoItem = document.createElement('li');
+        novoItem.className = 'itemLista';
+        novoItem.innerHTML = '<input type="checkbox"><span>' + texto + '</span><button class="botaoExcluir">🗑️</button>';
+        lista.appendChild(novoItem);
+        document.getElementById('campoTexto').value = '';
+  
+        // Adiciona um ouvinte de evento ao botão de excluir
+        novoItem.querySelector('.botaoExcluir').addEventListener('click', function() {
+          var confirmacao = confirm('Você realmente deseja excluir esta tarefa?');
+          if (confirmacao) {
+            lista.removeChild(novoItem);
+          }
+        });
+  
+        // Adiciona um ouvinte de evento ao checkbox
+        novoItem.querySelector('input[type="checkbox"]').addEventListener('change', function(e) {
+          if (e.target.checked) {
+            novoItem.querySelector('span').style.textDecoration = 'line-through dashed';
+          } else {
+            novoItem.querySelector('span').style.textDecoration = 'none';
+          }
+        });
+      } else {
+        alert('Por favor, digite uma tarefa antes de adicionar.'); // Mensagem de alerta
+      }
+    });
+  </script>
+</body>
+</html>
