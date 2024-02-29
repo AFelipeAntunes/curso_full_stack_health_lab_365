@@ -104,11 +104,16 @@
   <input id="campoTexto" type="text" placeholder="Digite uma tarefa">
   <button id="botaoAdicionar">➕ Adicionar Tarefa</button>
   <ul id="listaTarefas"></ul>
+  <p id="contador">Total de tarefas: 0, Tarefas concluídas: 0</p>
 
   <script>
+    var totalTarefas = 0;
+    var tarefasConcluidas = 0;
+  
     document.getElementById('botaoAdicionar').addEventListener('click', function() {
       var texto = document.getElementById('campoTexto').value;
       if (texto) {
+        totalTarefas++;
         var lista = document.getElementById('listaTarefas');
         var novoItem = document.createElement('li');
         novoItem.className = 'itemLista';
@@ -121,6 +126,11 @@
           var confirmacao = confirm('Você realmente deseja excluir esta tarefa?');
           if (confirmacao) {
             lista.removeChild(novoItem);
+            if (novoItem.querySelector('input[type="checkbox"]').checked) {
+              tarefasConcluidas--;
+            }
+            totalTarefas--;
+            atualizarContador();
           }
         });
   
@@ -128,15 +138,22 @@
         novoItem.querySelector('input[type="checkbox"]').addEventListener('change', function(e) {
           if (e.target.checked) {
             novoItem.querySelector('span').style.textDecoration = 'line-through';
+            tarefasConcluidas++;
           } else {
             novoItem.querySelector('span').style.textDecoration = 'none';
+            tarefasConcluidas--;
           }
+          atualizarContador();
         });
+        atualizarContador();
       } else {
         alert('Por favor, digite uma tarefa antes de adicionar.'); // Mensagem de alerta
       }
     });
+
+    function atualizarContador() {
+      document.getElementById('contador').textContent = 'Total de tarefas: ' + totalTarefas + ', Tarefas concluídas: ' + tarefasConcluidas;
+    }
   </script>
-  
 </body>
 </html>
