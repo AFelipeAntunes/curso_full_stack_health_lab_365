@@ -34,7 +34,9 @@
       atualizarContador();
     });
 
-    document.getElementById('botaoAdicionar').addEventListener('click', function() {
+     // Adiciona um ouvinte de evento ao campo de entrada de texto
+    document.getElementById('campoTexto').addEventListener('keypress', function(e) {
+    if (e.key === 'Enter') {
       var texto = document.getElementById('campoTexto').value;
       if (texto) {
         adicionarTarefa(texto, false);
@@ -43,7 +45,8 @@
       } else {
         alert('Por favor, digite uma tarefa antes de adicionar.'); // Mensagem de alerta
       }
-    });
+    }
+  });
 
     function adicionarTarefa(titulo, concluido) {
       totalTarefas++;
