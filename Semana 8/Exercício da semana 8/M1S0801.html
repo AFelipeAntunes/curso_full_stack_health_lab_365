@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <!-- Adicione o CSS do Bootstrap ao seu arquivo HTML -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 </head>
 <body>
@@ -15,7 +14,6 @@
       <p>Tarefas concluídas: <span id="tarefasConcluidas">0</span></p>
       <p>Porcentagem de tarefas concluídas: <span id="porcentagemConcluidas">0</span>%</p>
     </div>
-    <!-- Campo de entrada de arquivo para o upload de imagem -->
     <label for="campoImagem">Selecione uma imagem para definir como plano de fundo:</label>
     <input id="campoImagem" type="file" accept="image/*" class="form-control mb-3">
     <button id="botaoRemoverImagem" class="btn btn-danger mb-3">Remover Imagem</button>
@@ -25,7 +23,6 @@
     var totalTarefas = 0;
     var tarefasConcluidas = 0;
 
-    // Carrega as tarefas do localStorage ao iniciar a página
     document.addEventListener('DOMContentLoaded', function() {
       var tarefas = JSON.parse(localStorage.getItem('tarefas')) || [];
       tarefas.forEach(function(tarefa) {
@@ -34,29 +31,30 @@
       atualizarContador();
     });
 
-     // Adiciona um ouvinte de evento ao campo de entrada de texto
     document.getElementById('campoTexto').addEventListener('keypress', function(e) {
-    if (e.key === 'Enter') {
-      var texto = document.getElementById('campoTexto').value;
-      if (texto) {
-        adicionarTarefa(texto, false);
-        atualizarContador();
-        document.getElementById('campoTexto').value = '';
-      } else {
-        alert('Por favor, digite uma tarefa antes de adicionar.'); // Mensagem de alerta
+      if (e.key === 'Enter') {
+        var texto = document.getElementById('campoTexto').value;
+        if (texto) {
+          adicionarTarefa(texto, false);
+          atualizarContador();
+          document.getElementById('campoTexto').value = '';
+        } else {
+          alert('Por favor, digite uma tarefa antes de adicionar.');
+        }
       }
-    }
-  });
+    });
 
     function adicionarTarefa(titulo, concluido) {
       totalTarefas++;
+      if (concluido) {
+        tarefasConcluidas++;
+      }
       var lista = document.getElementById('listaTarefas');
       var novoItem = document.createElement('li');
       novoItem.className = 'list-group-item d-flex justify-content-between align-items-center';
       novoItem.innerHTML = '<div><input type="checkbox"' + (concluido ? ' checked' : '') + '><span class="ml-2">' + titulo + '</span></div><button class="botaoExcluir btn btn-danger">🗑️</button>';
       lista.appendChild(novoItem);
 
-      // Adiciona um ouvinte de evento ao botão de excluir
       novoItem.querySelector('.botaoExcluir').addEventListener('click', function() {
         var confirmacao = confirm('Você realmente deseja excluir esta tarefa?');
         if (confirmacao) {
@@ -70,14 +68,15 @@
         }
       });
 
-      // Adiciona um ouvinte de evento ao checkbox
       novoItem.querySelector('input[type="checkbox"]').addEventListener('change', function(e) {
         if (e.target.checked) {
           novoItem.querySelector('span').style.textDecoration = 'line-through';
           tarefasConcluidas++;
         } else {
           novoItem.querySelector('span').style.textDecoration = 'none';
-          tarefasConcluidas--;
+          if (tarefasConcluidas > 0) {
+            tarefasConcluidas--;
+          }
         }
         atualizarContador();
         salvarTarefas();
@@ -103,7 +102,6 @@
       localStorage.setItem('tarefas', JSON.stringify(tarefas));
     }
 
-    // Adiciona um ouvinte de evento ao campo de entrada de arquivo
     document.getElementById('campoImagem').addEventListener('change', function(e) {
       var arquivo = e.target.files[0];
       if (arquivo) {
@@ -115,7 +113,6 @@
       }
     });
 
-    // Adiciona um ouvinte de evento ao botão de remover imagem
     document.getElementById('botaoRemoverImagem').addEventListener('click', function() {
       document.body.style.backgroundImage = '';
     });
