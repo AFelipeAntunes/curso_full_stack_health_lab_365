@@ -33,16 +33,24 @@
 
     document.getElementById('campoTexto').addEventListener('keypress', function(e) {
       if (e.key === 'Enter') {
-        var texto = document.getElementById('campoTexto').value;
-        if (texto) {
-          adicionarTarefa(texto, false);
-          atualizarContador();
-          document.getElementById('campoTexto').value = '';
-        } else {
-          alert('Por favor, digite uma tarefa antes de adicionar.');
-        }
+        adicionarTarefaAoClicar();
       }
     });
+
+    document.getElementById('botaoAdicionar').addEventListener('click', function() {
+      adicionarTarefaAoClicar();
+    });
+
+    function adicionarTarefaAoClicar() {
+      var texto = document.getElementById('campoTexto').value;
+      if (texto) {
+        adicionarTarefa(texto, false);
+        atualizarContador();
+        document.getElementById('campoTexto').value = '';
+      } else {
+        alert('Por favor, digite uma tarefa antes de adicionar.');
+      }
+    }
 
     function adicionarTarefa(titulo, concluido) {
       totalTarefas++;
@@ -58,13 +66,13 @@
       novoItem.querySelector('.botaoExcluir').addEventListener('click', function() {
         var confirmacao = confirm('Você realmente deseja excluir esta tarefa?');
         if (confirmacao) {
+          removerTarefa(novoItem.querySelector('span').textContent);
           lista.removeChild(novoItem);
           if (novoItem.querySelector('input[type="checkbox"]').checked) {
             tarefasConcluidas--;
           }
           totalTarefas--;
           atualizarContador();
-          salvarTarefas();
         }
       });
 
@@ -83,6 +91,14 @@
       });
 
       salvarTarefas();
+    }
+
+    function removerTarefa(titulo) {
+      var tarefas = JSON.parse(localStorage.getItem('tarefas')) || [];
+      var tarefasAtualizadas = tarefas.filter(function(tarefa) {
+        return tarefa.titulo !== titulo;
+      });
+      localStorage.setItem('tarefas', JSON.stringify(tarefasAtualizadas));
     }
 
     function atualizarContador() {
