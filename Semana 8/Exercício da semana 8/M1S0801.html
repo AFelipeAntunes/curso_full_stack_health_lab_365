@@ -24,7 +24,7 @@
     var tarefasConcluidas = 0;
 
     document.addEventListener('DOMContentLoaded', function() {
-      var tarefas = JSON.parse(localStorage.getItem('tarefas')) || [];
+      var tarefas = lerTarefas();
       tarefas.forEach(function(tarefa) {
         adicionarTarefa(tarefa.titulo, tarefa.concluido);
       });
@@ -94,11 +94,20 @@
     }
 
     function removerTarefa(titulo) {
-      var tarefas = JSON.parse(localStorage.getItem('tarefas')) || [];
+      var tarefas = lerTarefas();
       var tarefasAtualizadas = tarefas.filter(function(tarefa) {
         return tarefa.titulo !== titulo;
       });
       localStorage.setItem('tarefas', JSON.stringify(tarefasAtualizadas));
+    }
+
+    function lerTarefas() {
+      var listaTarefas = localStorage.getItem('tarefas');
+      if (listaTarefas) {
+        return JSON.parse(listaTarefas);
+      } else {
+        return [];
+      }
     }
 
     function atualizarContador() {
