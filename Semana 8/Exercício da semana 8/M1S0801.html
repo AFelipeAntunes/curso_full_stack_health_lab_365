@@ -31,19 +31,24 @@
       atualizarContador();
     });
 
-     // Adiciona um ouvinte de evento ao campo de entrada de texto
     document.getElementById('campoTexto').addEventListener('keypress', function(e) {
-    if (e.key === 'Enter') {
+      if (e.key === 'Enter') {
+        adicionarTarefaAoClicar();
+      }
+    });
+
+    document.getElementById('botaoAdicionar').addEventListener('click', adicionarTarefaAoClicar);
+
+    function adicionarTarefaAoClicar() {
       var texto = document.getElementById('campoTexto').value;
       if (texto) {
         adicionarTarefa(texto, false);
         atualizarContador();
         document.getElementById('campoTexto').value = '';
       } else {
-        alert('Por favor, digite uma tarefa antes de adicionar.'); // Mensagem de alerta
+        alert('Por favor, digite uma tarefa antes de adicionar.');
       }
     }
-  });
 
     function adicionarTarefa(titulo, concluido) {
       totalTarefas++;
@@ -53,7 +58,7 @@
       var lista = document.getElementById('listaTarefas');
       var novoItem = document.createElement('li');
       novoItem.className = 'list-group-item d-flex justify-content-between align-items-center';
-      novoItem.innerHTML = '<div><input type="checkbox"' + (concluido ? ' checked' : '') + '><span class="ml-2">' + titulo + '</span></div><button class="botaoExcluir btn btn-danger">🗑️</button>';
+      novoItem.innerHTML = '<div><input type="checkbox"' + (concluido ? ' checked' : '') + '><span class="ml-2"' + (concluido ? ' style="text-decoration: line-through;"' : '') + '>' + titulo + '</span></div><button class="botaoExcluir btn btn-danger">🗑️</button>';
       lista.appendChild(novoItem);
 
       novoItem.querySelector('.botaoExcluir').addEventListener('click', function() {
@@ -118,19 +123,6 @@
         tarefas.push({ titulo: titulo, concluido: concluido });
       });
       localStorage.setItem('tarefas', JSON.stringify(tarefas));
-    }
-
-    function atualizarTarefa(titulo) {
-      var tarefas = JSON.parse(localStorage.getItem('tarefas')) || [];
-      var tarefaExistente = tarefas.find(function(tarefa) {
-        return tarefa.titulo === titulo;
-      });
-      if (tarefaExistente) {
-        tarefaExistente.concluido = true;
-        localStorage.setItem('tarefas', JSON.stringify(tarefas));
-      } else {
-        console.log('Tarefa não encontrada.');
-      }
     }
 
     document.getElementById('campoImagem').addEventListener('change', function(e) {
