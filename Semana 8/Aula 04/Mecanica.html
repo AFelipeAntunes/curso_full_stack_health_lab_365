@@ -4,19 +4,33 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Oficina Mecânica</title>
+    <!-- Adicionando Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #000;
+            color: #ccc;
+        }
+    </style>
 </head>
 <body>
-    <h1>Serviços Oferecidos</h1>
-    <div id="services"></div>
+    <div class="container">
+        <h1 class="text-center mt-5 text-light">Serviços Oferecidos</h1>
+        <div id="services" class="mt-4"></div>
 
-    <h1>Atualizar Preços</h1>
-    <form id="priceForm">
-        <label for="service">Serviço:</label><br>
-        <input type="text" id="service" name="service"><br>
-        <label for="price">Preço:</label><br>
-        <input type="text" id="price" name="price"><br>
-        <input type="submit" value="Atualizar">
-    </form>
+        <h1 class="text-center mt-5 text-light">Atualizar Preços</h1>
+        <form id="priceForm" class="mt-4">
+            <div class="form-group">
+                <label for="service">Serviço:</label>
+                <input type="text" id="service" name="service" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="price">Preço:</label>
+                <input type="text" id="price" name="price" class="form-control">
+            </div>
+            <input type="submit" value="Atualizar" class="btn btn-primary">
+        </form>
+    </div>
 
     <script src="script.js"></script>
 </body>
