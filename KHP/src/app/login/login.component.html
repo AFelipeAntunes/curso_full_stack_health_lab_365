@@ -1,15 +1,15 @@
 <form (submit)="login(); $event.preventDefault()">
-    <div class="form-group">
-      <label for="email">Email:</label>
-      <input type="email" id="email" class="form-control" placeholder="Digite seu email" [(ngModel)]="user.email">
-    </div>
-  
-    <div class="form-group">
-      <label for="password">Senha:</label>
-      <input type="password" id="password" class="form-control" placeholder="Digite sua senha" [(ngModel)]="user.password">
-    </div>
-  
-    <button type="submit" class="btn btn-primary">Entrar</button>
-    <button type="button" class="btn btn-link" (click)="forgotPassword()">Esqueci a senha</button>
-    <a href="/cadastro" class="btn btn-link">Cadastrar-me</a>
+  <div class="form-group">
+    <label for="email">Email:</label>
+    <input type="email" id="email" class="form-control" placeholder="Digite seu email">
+  </div>
+
+  <div class="form-group">
+    <label for="password">Senha:</label>
+    <input type="password" id="password" class="form-control" placeholder="Digite sua senha">
+  </div>
+
+  <button type="submit" class="btn btn-primary">Entrar</button>
+  <button type="button" class="btn btn-link" (click)="forgotPassword()">Esqueci a senha</button>
+  <a href="/cadastro" class="btn btn-link">Cadastrar-me</a>
 </form>
