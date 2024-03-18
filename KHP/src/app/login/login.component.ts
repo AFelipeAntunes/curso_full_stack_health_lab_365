@@ -1,53 +1,23 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-
-interface User {
-  email: string;
-  password: string;
-  // quaisquer outras propriedades que um usuário possa ter
-}
+import { Component } from '@angular/core';
+import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent implements OnInit {
-  user = {
-    email: '',
-    password: ''
-  };
+export class LoginComponent {
+  email: string;
+  password: string;
 
-  constructor(private router: Router) { }
+  constructor(private authService: AuthService) {}
 
-  ngOnInit(): void {
-  }
-
-  login(): void {
-    const users: User[] = JSON.parse(localStorage.getItem('users') || '[]');
-    const user = users.find((u: User) => u.email === this.user.email && u.password === this.user.password);
-  
-    if (user) {
-      this.router.navigate(['/home']); // Redireciona para a página 'home' se o usuário for encontrado
+  onSubmit() {
+    if (this.authService.validateUser(this.email, this.password)) {
+      // Redirecionar para a página de home
     } else {
-      alert('Usuário ou senha inválidos');
+      // Exibir um alerta
+      alert('Email ou senha inválidos');
     }
-  }
-
-  forgotPassword(): void {
-    const users: User[] = JSON.parse(localStorage.getItem('users') || '[]');
-    const user = users.find((u: User) => u.email === this.user.email);
-
-    if (user) {
-      user.password = 'a1b2c4d4';
-      localStorage.setItem('users', JSON.stringify(users));
-      alert('Sua senha foi alterada para a1b2c4d4. Por favor, prossiga utilizando essa senha.');
-    } else {
-      alert('Usuário não encontrado');
-    }
-  }
-
-  register(): void {
-    this.router.navigate(['/cadastro']);
   }
 }

@@ -1,51 +1,31 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-
-interface User {
-  name: string;
-  email: string;
-  birthdate: string;
-  password: string;
-}
+import { Component } from '@angular/core';
+import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'app-cadastro',
   templateUrl: './cadastro.component.html',
   styleUrls: ['./cadastro.component.css']
 })
-export class CadastroComponent implements OnInit {
-  user = {
-    name: '',
-    email: '',
-    birthdate: '',
-    password: '',
-    confirmPassword: ''
-  };
+export class CadastroComponent {
+  nome: string;
+  email: string;
+  dataNascimento: Date;
+  senha: string;
+  confirmarSenha: string;
 
-  constructor(private router: Router) { }
+  constructor(private authService: AuthService) {}
 
-  ngOnInit(): void {
-  }
-
-  register(): void {
-    if (this.user.password !== this.user.confirmPassword) {
+  onSubmit() {
+    if (this.senha === this.confirmarSenha) {
+      this.authService.registerUser(this.email, this.senha);
+      // Redirecionar para a página de login
+    } else {
+      // Exibir um alerta
       alert('As senhas não coincidem');
-      return;
     }
-
-    const users: User[] = JSON.parse(localStorage.getItem('users') || '[]');
-    users.push({
-      name: this.user.name,
-      email: this.user.email,
-      birthdate: this.user.birthdate,
-      password: this.user.password
-    });
-    localStorage.setItem('users', JSON.stringify(users));
-
-    this.router.navigate(['/login']);
   }
 
-  goBack(): void {
-    this.router.navigate(['/login']);
+  onBack() {
+    // Redirecionar para a página de login
   }
 }
