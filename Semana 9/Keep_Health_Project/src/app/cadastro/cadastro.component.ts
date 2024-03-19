@@ -1,29 +1,30 @@
-import { Component } from '@angular/core';
-import { AuthService } from '../auth.service'; // Certifique-se de que este caminho esteja correto
+import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'app-cadastro',
   templateUrl: './cadastro.component.html',
   styleUrls: ['./cadastro.component.css']
 })
-export class CadastroComponent {
-  nome: string;
-  email: string;
-  dataNascimento: Date;
-  senha: string;
-  confirmarSenha: string;
+export class CadastroComponent implements OnInit {
+  cadastroForm!: FormGroup; // Use o operador de afirmação não nula (!)
 
-  constructor(private authService: AuthService) { // Injetando o AuthService
-    this.nome = '';
-    this.email = '';
-    this.dataNascimento = new Date();
-    this.senha = '';
-    this.confirmarSenha = '';
+  constructor(private authService: AuthService) { }
+
+  ngOnInit() {
+    this.cadastroForm = new FormGroup({
+      'nome': new FormControl(null, Validators.required),
+      'email': new FormControl(null, [Validators.required, Validators.email]),
+      'dataNascimento': new FormControl(null, Validators.required),
+      'senha': new FormControl(null, Validators.required),
+      'confirmarSenha': new FormControl(null, Validators.required)
+    });
   }
 
   onSubmit() {
-    if (this.senha === this.confirmarSenha) {
-      this.authService.register(this.email, this.senha); // Usando o AuthService para registrar o usuário
+    if (this.cadastroForm.value.senha === this.cadastroForm.value.confirmarSenha) {
+      this.authService.register(this.cadastroForm.value.email, this.cadastroForm.value.senha);
       window.location.href = '/login';
     } else {
       console.log('As senhas não coincidem');
