@@ -1,13 +1,15 @@
-import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { Component, NgModule } from '@angular/core';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @Component({
-  selector: 'app-root',
-  standalone: true,
-  imports: [RouterOutlet],
+  selector: 'my-app',
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+})
+@NgModule({
+  imports: [ReactiveFormsModule],
+  declarations: [AppComponent],
+  bootstrap: [AppComponent],
 })
 export class AppComponent {
-  title = 'Keep_health_Project';
+  // ...
 }

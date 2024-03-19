@@ -1,21 +1,25 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent {
-  email: string;
-  password: string;
+export class LoginComponent implements OnInit {
 
-  constructor() {
-    this.email = '';
-    this.password = '';
-  }
+  email: string = '';
+  password: string = '';
 
-  onSubmit() {
-    // Aqui você pode adicionar a lógica para lidar com o envio do formulário
-    console.log(`Email: ${this.email}, Password: ${this.password}`);
+  constructor(private router: Router) {}
+
+  ngOnInit(): void {}
+
+  onSubmit(): void {
+    // TODO: Implementar a lógica de autenticação
+    console.log('Dados do login:', this.email, this.password);
+
+    // Simulando autenticação com sucesso
+    this.router.navigate(['/home']);
   }
 }

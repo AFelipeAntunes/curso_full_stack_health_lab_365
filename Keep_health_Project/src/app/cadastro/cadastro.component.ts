@@ -1,5 +1,4 @@
-import { Component } from '@angular/core';
-import { NgForm } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
@@ -7,19 +6,39 @@ import { Router } from '@angular/router';
   templateUrl: './cadastro.component.html',
   styleUrls: ['./cadastro.component.css']
 })
-export class CadastroComponent {
+export class CadastroComponent implements OnInit {
+
+  nome: string = '';
+  email: string = '';
+  dataNascimento: string = '';
+  senha: string = '';
+  confirmarSenha: string = '';
+
   constructor(private router: Router) {}
 
-  onSubmit(form: NgForm) {
-    if (form.valid && form.value.senha === form.value.confirmarSenha) {
-      const usuarios = JSON.parse(localStorage.getItem('usuarios') || '[]');
-      usuarios.push({ email: form.value.email, senha: form.value.senha });
-      localStorage.setItem('usuarios', JSON.stringify(usuarios));
+  ngOnInit(): void {}
+
+  onSubmit(): void {
+    if (this.senha === this.confirmarSenha) {
+      // TODO: Implementar a lógica de salvar o usuário (API, etc.)
+      console.log('Dados do cadastro:', this.nome, this.email, this.dataNascimento, this.senha);
+
+      // Simulando o salvamento do usuário com sucesso
+      localStorage.setItem('usuarios', JSON.stringify([...this.getUsuarios(), {
+        nome: this.nome,
+        email: this.email,
+        dataNascimento: this.dataNascimento,
+        senha: this.senha
+      }]));
+
       this.router.navigate(['/login']);
+    } else {
+      alert('As senhas não coincidem!');
     }
   }
 
-  onVoltar() {
-    this.router.navigate(['/login']);
+  getUsuarios(): any[] {
+    const usuarios = localStorage.getItem('usuarios');
+    return usuarios ? JSON.parse(usuarios) : [];
   }
 }

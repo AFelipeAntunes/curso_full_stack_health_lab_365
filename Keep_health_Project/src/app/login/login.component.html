@@ -1,19 +1,15 @@
-<form>
-    <div>
-      <label for="email">Email:</label>
-      <input type="email" id="email" name="email">
-    </div>
-    <div>
-      <label for="password">Senha:</label>
-      <input type="password" id="password" name="password">
-    </div>
-    <div>
-      <button type="submit">Entrar</button>
-    </div>
-    <div>
-      <button type="button">Esqueci a senha</button>
-    </div>
-    <div>
-      <a href="/cadastro">Cadastrar-me</a>
-    </div>
-  </form>
+<h1>Login</h1>
+
+<form (ngSubmit)="onSubmit()">
+  <label for="email">Email:</label>
+  <input type="email" id="email" name="email" [(ngModel)]="email" required>
+
+  <label for="password">Senha:</label>
+  <input type="password" id="password" name="password" [(ngModel)]="password" required>
+
+  <button type="submit">Entrar</button>
+
+  <a [routerLink]="['/cadastro']">Esqueci a senha</a>
+
+  <a [routerLink]="['/cadastro']">Cadastrar-me</a>
+</form>
