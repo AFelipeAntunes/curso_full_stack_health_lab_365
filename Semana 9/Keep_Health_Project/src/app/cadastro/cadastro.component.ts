@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AuthService } from '../auth.service'; // Certifique-se de que este caminho esteja correto
 
 @Component({
   selector: 'app-cadastro',
@@ -12,7 +13,7 @@ export class CadastroComponent {
   senha: string;
   confirmarSenha: string;
 
-  constructor() {
+  constructor(private authService: AuthService) { // Injetando o AuthService
     this.nome = '';
     this.email = '';
     this.dataNascimento = new Date();
@@ -22,9 +23,8 @@ export class CadastroComponent {
 
   onSubmit() {
     if (this.senha === this.confirmarSenha) {
-      // Aqui você pode adicionar a lógica para lidar com o envio do formulário
-      console.log(`Nome: ${this.nome}, Email: ${this.email}, Data de Nascimento: ${this.dataNascimento}, Senha: ${this.senha}`);
-      localStorage.setItem('usuarios', JSON.stringify({email: this.email, senha: this.senha}));
+      this.authService.register(this.email, this.senha); // Usando o AuthService para registrar o usuário
+      window.location.href = '/login';
     } else {
       console.log('As senhas não coincidem');
     }
