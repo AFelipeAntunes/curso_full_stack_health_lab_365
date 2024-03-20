@@ -1,18 +1,7 @@
-import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
-import { LoginComponent } from './login/login.component';
-import { HomeComponent } from './home/home.component';
-import { CadastroComponent } from './cadastro/cadastro.component';
+import { Routes } from '@angular/router';
+// ... seus componentes
 
-const routes: Routes = [
-  { path: 'login', component: LoginComponent },
-  { path: 'home', component: HomeComponent },
-  { path: 'cadastro', component: CadastroComponent },
-  { path: '**', redirectTo: 'home' } // Rota padrão para redirecionar URLs inválidas
+export const routes: Routes = [ // Exporta a constante 'routes' explicitamente
+  { path: 'login', component:LoginComponent },
+  // ... suas rotas
 ];
-
-@NgModule({
-  imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
-})
-export class AppRoutingModule { }
