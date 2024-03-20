@@ -2,11 +2,13 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
-import { AppRoutingModule } from './app-routing/app-routing.module'; // Importe o AppRoutingModule
+import { LoginComponent } from './login/login.component';
+import { AppRoutingModule } from './app-routing/app-routing.module';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    LoginComponent // Adicione o LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -14,6 +16,6 @@ import { AppRoutingModule } from './app-routing/app-routing.module'; // Importe 
     AppRoutingModule // Adicione o AppRoutingModule
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent, LoginComponent] // Adicione o LoginComponent
 })
 export class AppModule { }
