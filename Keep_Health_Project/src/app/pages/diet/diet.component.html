@@ -1,1 +1,6 @@
-<p>diet works!</p>
+<ul>
+    <li *ngFor="let alimento of listaProdutos" (click)="verDetalhes(alimento.id)">
+      {{ alimento.nome }}
+    </li>
+  </ul>
+  

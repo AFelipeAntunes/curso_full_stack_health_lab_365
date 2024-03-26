@@ -1,12 +1,25 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+
+interface Produto {
+  id: number;
+  nome: string;
+  // outras propriedades
+}
 
 @Component({
   selector: 'app-diet',
-  standalone: true,
-  imports: [],
   templateUrl: './diet.component.html',
-  styleUrl: './diet.component.css'
+  styleUrls: ['./diet.component.css']
 })
-export class DietComponent {
+export class DietComponent implements OnInit {
+  listaProdutos: Produto[] = [
+    { id: 1, nome: 'Alimento 1', /* outras propriedades */ },
+    { id: 2, nome: 'Alimento 2', /* outras propriedades */ },
+    // outros alimentos
+  ];
 
+  constructor() { }
+
+  ngOnInit(): void {
+  }
 }
