@@ -7,8 +7,8 @@ import { ActivityComponent } from './activity/activity.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { DietasComponent } from './pages/dietas/dietas.component';
 import { PerfilComponent } from './pages/perfil/perfil.component';
-import { DietComponent } from './pages/diet/diet.component'; // Adicione a importação para o componente Diet
-import { DietDetailComponent } from './pages/diet-detail/diet-detail.component'; // Adicione a importação para o componente DietDetail
+import { DietComponent } from './pages/diet/diet.component';
+import { DietDetailComponent } from './pages/diet-detail/diet-detail.component'; // Atualize a importação para o novo local do componente DietDetail
 
 export const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -19,7 +19,12 @@ export const routes: Routes = [
   { path: 'dashboard', component: DashboardComponent },
   { path: 'dietas', component: DietasComponent },
   { path: 'perfil', component: PerfilComponent },
-  { path: 'diet', component: DietComponent }, // Adicione a rota para a página Diet
-  { path: 'diet-detail', component: DietDetailComponent }, // Adicione a rota para a página DietDetail
+  { 
+    path: 'diet', 
+    component: DietComponent,
+    children: [
+      { path: ':id', component: DietDetailComponent }, // Adicione a rota filha para a página DietDetail
+    ]
+  },
   { path: '', redirectTo: '/home', pathMatch: 'full' } // redireciona para a home se a rota não existir
 ];
