@@ -1,15 +1,15 @@
 <div class="perfil">
-    <h2>Perfil do Usuário</h2>
-    <p>Nome: {{ nome }}</p>
-    <p>Email: {{ email }}</p>
-    <p>Peso: {{ peso }} kg</p>
-    <p>Altura: {{ altura | cmToMeters }} m</p> <!-- Aqui é onde você coloca a altura em metros -->
-    <p>Código do usuário: {{ codigoUsuario }}</p>
-    <p>Idade: {{ idade }}</p>
-    <div>
-      <label for="cep">CEP:</label>
-      <input type="text" id="cep">
-      <button>Pesquisar</button>
-    </div>
+  <h2>Perfil do Usuário</h2>
+  <p>Nome: {{ nome }}</p>
+  <p>Email: {{ email }}</p>
+  <p>Peso: {{ peso }} kg</p>
+  <p>Altura: {{ altura | cmToMeters }} m</p> <!-- Aqui é onde você coloca a altura em metros -->
+  <p>Código do usuário: {{ codigoUsuario }}</p>
+  <p>Idade: {{ idade }}</p>
+  <div>
+    <label for="cep">CEP:</label>
+    <input [(ngModel)]="cep" type="text" id="cep">
+    <button (click)="pesquisar()">Pesquisar</button>
+    <p>{{ endereco }}</p>
   </div>
-  
+</div>
