@@ -1,12 +1,22 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
-  standalone: true,
-  imports: [],
   templateUrl: './home.component.html',
-  styleUrl: './home.component.css'
+  styleUrls: ['./home.component.css']
 })
 export class HomeComponent {
 
+  constructor(private router: Router) {}
+
+  goToLogin() {
+    // Redireciona para a tela de login
+    this.router.navigate(['/login']);
+  }
+
+  goToCadastro() {
+    // Redireciona para a tela de cadastro
+    this.router.navigate(['/cadastro']);
+  }
 }
