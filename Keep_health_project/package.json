@@ -7,7 +7,7 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "serve:ssr:Keep_Health_Project": "node dist/keep-health-project/server/server.mjs"
+    "serve:ssr:Keep_health_project": "node dist/keep-health-project/server/server.mjs"
   },
   "private": true,
   "dependencies": {

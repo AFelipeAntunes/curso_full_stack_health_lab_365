@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "Keep_Health_Project": {
+    "Keep_health_project": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -62,10 +62,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "Keep_Health_Project:build:production"
+              "buildTarget": "Keep_health_project:build:production"
             },
             "development": {
-              "buildTarget": "Keep_Health_Project:build:development"
+              "buildTarget": "Keep_health_project:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -73,7 +73,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "buildTarget": "Keep_Health_Project:build"
+            "buildTarget": "Keep_health_project:build"
           }
         },
         "test": {
@@ -96,8 +96,5 @@
         }
       }
     }
-  },
-  "cli": {
-    "analytics": "218d3ff6-021c-4460-b13b-6e840322d0a3"
   }
 }
