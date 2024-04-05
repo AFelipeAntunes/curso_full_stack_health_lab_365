@@ -1,18 +1,18 @@
 <!-- login.component.html -->
 <div class="login-container">
-    <form>
-      <div class="form-group">
-        <label for="email">Email:</label>
-        <input type="email" id="email" name="email" class="form-control" style="background-color: var(--color-primary); color: var(--color-secondary);">
-      </div>
-  
-      <div class="form-group">
-        <label for="password">Senha:</label>
-        <input type="password" id="password" name="password" class="form-control" style="background-color: var(--color-primary); color: var(--color-secondary);">
-      </div>
-  
-      <button type="submit" class="btn btn-primary" style="background-color: var(--color-secondary); color: var(--color-primary);">Entrar</button>
-      <button type="button" class="btn btn-link" style="color: var(--color-accent);">Esqueci a senha</button>
-      <button type="button" class="btn btn-link" style="color: var(--color-accent);">Cadastrar-me</button>
-    </form>
-  </div>
+  <form (ngSubmit)="login()">
+    <div class="form-group">
+      <label for="email">Email:</label>
+      <input [(ngModel)]="email" type="email" id="email" name="email" class="form-control">
+    </div>
+
+    <div class="form-group">
+      <label for="password">Senha:</label>
+      <input [(ngModel)]="password" type="password" id="password" name="password" class="form-control">
+    </div>
+
+    <button type="submit" class="btn btn-primary">Entrar</button>
+    <button (click)="resetPassword()" type="button" class="btn btn-link">Esqueci a senha</button>
+    <button (click)="register()" type="button" class="btn btn-link">Cadastrar-me</button>
+  </form>
+</div>
