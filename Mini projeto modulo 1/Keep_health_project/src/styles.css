@@ -1,1 +1,20 @@
-/* You can add global styles to this file, and also import other style files */
+/* Estilos globais em styles.css */
+:root {
+    --color-primary: #007BFF; /* Azul elétrico */
+    --color-secondary: #C3E618; /* Verde limão */
+    --color-accent: #FF5733; /* Laranja */
+  }
+  
+  body {
+    background-color: var(--color-primary);
+  }
+  
+  button {
+    background-color: var(--color-secondary);
+    color: var(--color-primary);
+  }
+  
+  a {
+    color: var(--color-accent);
+  }
+  
