@@ -6,6 +6,7 @@ import { CadastroComponent } from './cadastro/cadastro.component';
 import { HomeComponent } from './home/home.component';
 import { DietasComponent } from './dietas/dietas.component';
 import { PerfilComponent } from './perfil/perfil.component';
+import { DietDetailComponent } from './diet-detail/diet-detail.component';
 
 export const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -13,6 +14,7 @@ export const routes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'dietas', component: DietasComponent },
   { path: 'perfil', component: PerfilComponent },
+  { path: 'diet-detail', component: DietDetailComponent },
   // outras rotas...
 ];
 
