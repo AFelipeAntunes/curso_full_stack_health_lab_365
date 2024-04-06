@@ -1,13 +1,25 @@
-import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+// app.component.ts
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-root',
-  standalone: true,
-  imports: [RouterOutlet],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  styleUrls: ['./app.component.css']
 })
-export class AppComponent {
-  title = 'Keep_health_project';
+export class AppComponent implements OnInit {
+  ngOnInit() {
+    const alimentos = [
+      {
+        id: 1,
+        name: "Abacate",
+        description: "...",
+        qttCalories: 0,
+        qttDaysFeed: 3,
+        imageLink: ""
+      },
+      // outros alimentos...
+    ];
+
+    localStorage.setItem('alimentos', JSON.stringify(alimentos));
+  }
 }
