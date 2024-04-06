@@ -1,5 +1,5 @@
 // app.component.ts
-import { Component } from '@angular/core';
+import { Component, NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
 @Component({
@@ -11,3 +11,9 @@ import { RouterModule } from '@angular/router';
 export class AppComponent {
   // restante do código...
 }
+
+@NgModule({
+  declarations: [AppComponent],
+  imports: [RouterModule]
+})
+export class AppModule { }
