@@ -4,11 +4,13 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class AuthService {
-  private users = localStorage.getItem('users') ? JSON.parse(localStorage.getItem('users')!) : [];
+  private users = typeof localStorage !== 'undefined' && localStorage.getItem('users') ? JSON.parse(localStorage.getItem('users')!) : [];
 
   register(email: string, password: string) {
     this.users.push({ email, password });
-    localStorage.setItem('users', JSON.stringify(this.users));
+    if (typeof localStorage !== 'undefined') {
+      localStorage.setItem('users', JSON.stringify(this.users));
+    }
   }
 
   login(email: string, password: string) {
@@ -19,7 +21,9 @@ export class AuthService {
     const user = this.users.find((user: { email: string, password: string }) => user.email === email);
     if (user) {
       user.password = 'a1b2c4d4';
-      localStorage.setItem('users', JSON.stringify(this.users));
+      if (typeof localStorage !== 'undefined') {
+        localStorage.setItem('users', JSON.stringify(this.users));
+      }
     }
   }
 }
